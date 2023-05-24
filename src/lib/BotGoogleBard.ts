@@ -6,14 +6,7 @@ export class BotGoogleBard implements IBot {
 
   constructor() {
     this.bard = new Bard(
-      `__Secure-1PSID=${process.env.NEXT_PUBLIC_GOOGLE_APPLICATION_CREDENTIALS}`,
-      {
-        proxy: {
-          host: "162.212.155.148",
-          port: 8080,
-          protocol: "http",
-        },
-      }
+      `__Secure-1PSID=${process.env.NEXT_PUBLIC_GOOGLE_APPLICATION_CREDENTIALS}`
     );
   }
 
