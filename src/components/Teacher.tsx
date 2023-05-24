@@ -15,13 +15,10 @@ export function Teacher() {
     try {
       setLoading(true);
       setResponse("");
-      const { data: response } = await axios.post(
-        "http://localhost:3000/api/corrector",
-        {
-          message,
-          messageType,
-        }
-      );
+      const { data: response } = await axios.post("/api/corrector", {
+        message,
+        messageType,
+      });
 
       setResponse(response);
     } catch (e) {
