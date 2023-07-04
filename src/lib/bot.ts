@@ -7,4 +7,8 @@ export class Bot {
   ask(message: string) {
     return this.bot.ask(message);
   }
+
+  ask2(message: string) {
+    return this.bot.ask(message);
+  }
 }

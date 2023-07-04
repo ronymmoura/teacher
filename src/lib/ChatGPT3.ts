@@ -12,13 +12,22 @@ export class ChatGPT3 implements IBot {
   }
 
   async ask(message: string) {
-    const response = await this.openAI.createCompletion({
-      model: "text-davinci-003",
-      prompt: message,
-    });
+    try {
+      const response = await this.openAI.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: message }],
+      });
 
-    console.log(response.data);
-
-    return response.data.choices[0].text!;
+      return response.data.choices[0].message?.content;
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        return error.response.data;
+      } else {
+        console.log(error.message);
+        return error.message;
+      }
+    }
   }
 }
