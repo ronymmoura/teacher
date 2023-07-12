@@ -1,5 +1,5 @@
-import { MessageType } from "@/components/MessageTypeButton";
 // import { BotGoogleBard } from "@/lib/BotGoogleBard";
+import { MessageType } from "@/components/TeacherChat";
 import { ChatGPT3 } from "@/lib/ChatGPT3";
 import { Bot } from "@/lib/bot";
 import { NextRequest, NextResponse } from "next/server";
