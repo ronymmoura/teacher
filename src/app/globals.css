@@ -7,8 +7,27 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+:root {
+  --color-primary: #8796EA;
+
+  --scrollbar-thumb-radius: 5px;
+  --scrollbar-thumb: var(--color-primary);
+  --scrollbar-width: 5px;
+}
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: #aaa;
+  cursor: text;
+}
+
 @layer components {
-  .button {
-    @apply rounded-full bg-purple-600 px-16 py-2 text-sm font-bold transition-colors hover:bg-purple-800;
+  .scrollbar::-webkit-scrollbar {
+    @apply w-0;
+  }
+
+  .scrollbar:hover::-webkit-scrollbar {
+    @apply w-[5px];
   }
 }

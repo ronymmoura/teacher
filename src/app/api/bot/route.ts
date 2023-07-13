@@ -1,7 +1,6 @@
-// import { BotGoogleBard } from "@/lib/BotGoogleBard";
 import { MessageType } from "@/components/TeacherChat";
-import { ChatGPT3 } from "@/lib/ChatGPT3";
-import { Bot } from "@/lib/bot";
+import { ChatGPT3 } from "@/lib/bots/ChatGPT3";
+import { Bot } from "@/lib/bots/Bot";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -11,13 +10,15 @@ export async function POST(request: NextRequest) {
       messageType: MessageType;
     };
 
-    // const bot = new Bot(new BotGoogleBard());
     const bot = new Bot(new ChatGPT3());
 
     const prefix = "You are an English teacher.";
     let finalMessage = "";
 
     switch (messageType) {
+      case "free":
+        finalMessage = message;
+        break;
       case "correct":
         finalMessage = `${prefix} Correct the following sentence and explain what's wrong: "${message}"`;
         break;

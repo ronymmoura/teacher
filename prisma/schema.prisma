@@ -9,3 +9,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Sentence {
+  id        String   @id @default(uuid())
+  sentence  String
+  createdAt DateTime @default(now())
+
+  composition Word[]
+}
+
+model Word {
+  id          String    @id @default(uuid())
+  word        String
+  translation String
+  type        WordType?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  sentence   Sentence? @relation(fields: [sentenceId], references: [id])
+  sentenceId String?
+}
+
+enum WordType {
+  Noun
+  Pronoun
+  Verb
+  Adjective
+  Adverb
+  Preposition
+  Conjunction
+  Interjection
+  Numeral
+  Article
+  Determiner
+}

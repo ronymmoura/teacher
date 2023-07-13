@@ -8,9 +8,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: "var(--font-poppins)",
+        main: "var(--font-poppins)",
+        alt: "var(--font-grandiflora)",
+      },
+      textColor: {
+        primary: "var(--color-primary)",
+      },
+      backgroundColor: {
+        primary: "var(--color-primary)",
       },
     },
   },
-  plugins: [require("tailwindcss-radix")],
+  plugins: [require("tailwind-scrollbar"), require("tailwindcss-radix")],
 };

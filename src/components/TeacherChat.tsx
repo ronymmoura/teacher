@@ -87,7 +87,7 @@ export function TeacherChat() {
         },
       ]);
 
-      const { data: response } = await axios.post("/api/corrector", {
+      const { data: response } = await axios.post("/api/bot", {
         message: msg,
         messageType: msgType.current,
       });
@@ -121,14 +121,17 @@ export function TeacherChat() {
   }
 
   return (
-    <div className="flex h-screen flex-col">
+    <aside className="hidden h-screen flex-col border border-slate-800 bg-zinc-900 bg-opacity-50 shadow-md shadow-black md:flex md:w-[400px]">
+      {/* Header */}
       <div className="p-5">
         <div className="font-bol text-3xl">Chat</div>
+
         <div className="text-sm font-light">
           Our virtual teacher is here to help!
         </div>
       </div>
 
+      {/* Chat */}
       <div className="flex-1 justify-end overflow-y-auto">
         <div className="flex h-full flex-col">
           {chat.map((message, idx) => (
@@ -139,7 +142,7 @@ export function TeacherChat() {
                     src={"./teacher.png"}
                     alt="Avatar"
                     className={twMerge(
-                      "h-full w-full rounded-full bg-purple-400 object-cover"
+                      "h-full w-full rounded-full bg-primary object-cover shadow-md shadow-black"
                     )}
                   />
                 </AvatarPrimitive.Root>
@@ -147,7 +150,7 @@ export function TeacherChat() {
 
               <div
                 className={twMerge(
-                  "flex-1 rounded-md  p-2",
+                  "flex-1 rounded-md p-2 shadow-md shadow-black",
                   message.who === "user"
                     ? "bg-emerald-600 text-gray-200"
                     : "bg-slate-600 text-gray-200"
@@ -159,12 +162,17 @@ export function TeacherChat() {
 
               {message.who === "user" && (
                 <AvatarPrimitive.Root className="relative inline-flex h-10 w-10">
+                  <AvatarPrimitive.Image
+                    src={"https://github.com/ronymmoura.png"}
+                    alt="Avatar"
+                    className="h-full w-full rounded-full bg-primary object-cover shadow-md shadow-black"
+                  />
                   <AvatarPrimitive.Fallback
                     className={twMerge(
                       "flex h-full w-full items-center justify-center rounded-full bg-gray-700"
                     )}
                   >
-                    <span className="bg-gray-700 text-sm font-medium  text-gray-200">
+                    <span className="bg-gray-700 text-sm font-medium text-gray-200">
                       You
                     </span>
                   </AvatarPrimitive.Fallback>
@@ -199,11 +207,18 @@ export function TeacherChat() {
         </div>
       </div>
 
+      {/* Message Types Select */}
       <div className="flex w-full items-center border-t border-slate-800">
-        <div className="p-2">Message type:</div>
+        <div className="flex h-full items-center bg-slate-800 p-2">
+          Message type:
+        </div>
+
         <Select.Root value={messageType} onValueChange={setMessageType}>
-          <Select.Trigger className="flex flex-1 items-center space-x-3 p-2 transition-colors hover:bg-slate-800">
-            <Select.Value />
+          <Select.Trigger className="flex h-full flex-1 items-center space-x-3 p-2 text-lg outline-none transition-colors hover:bg-slate-800">
+            <div className="flex-1 text-left">
+              <Select.Value />
+            </div>
+
             <Select.Icon className="ml-2">
               <FaChevronDown />
             </Select.Icon>
@@ -245,6 +260,7 @@ export function TeacherChat() {
         </Select.Root>
       </div>
 
+      {/* Input */}
       <div className="flex border-t border-slate-800">
         <ContentEditable
           onChange={handleOnContentChange}
@@ -252,16 +268,16 @@ export function TeacherChat() {
           onKeyDownCapture={handleOnKeyUp}
           html={message.current}
           placeholder="Say something here..."
-          className="flex-1 overflow-x-auto bg-transparent p-2 pr-0 text-zinc-200 outline-none"
+          className="flex-1 overflow-x-auto bg-transparent p-3 pr-0 text-zinc-200 outline-none"
         />
 
         <div
-          className="flex h-full w-[40px] cursor-pointer items-center justify-center transition-colors hover:bg-zinc-700"
+          className="flex h-full w-[50px] cursor-pointer items-center justify-center transition-colors hover:bg-slate-800"
           onClick={handleGo}
         >
           <FaPaperPlane />
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

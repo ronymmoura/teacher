@@ -1,7 +1,17 @@
 import { ReactNode } from "react";
 import { Poppins } from "next/font/google";
-import "./globals.css";
+import localFont from "next/font/local";
+
 import { TeacherChat } from "@/components/TeacherChat";
+import { Navbar } from "@/components/Navbar";
+
+import "./globals.css";
+
+const grandiflora = localFont({
+  src: "../assets/Grandiflora_One/GrandifloraOne-Regular.ttf",
+  display: "swap",
+  variable: "--font-grandiflora",
+});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,15 +29,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${poppins.variable} flex bg-gray-900 bg-[url(../assets/bg-stars.svg)] bg-repeat font-sans text-gray-100`}
+        className={`${
+          poppins.variable
+        } ${`${grandiflora.variable}`} flex bg-gray-900 bg-[url(../assets/bg-stars.svg)] bg-repeat font-main text-gray-100`}
       >
-        <nav className="hidden w-full md:flex md:w-[250px]">Nav</nav>
+        <Navbar />
 
         <main className="flex-1">{children}</main>
 
-        <aside className="border-l border-slate-800 bg-zinc-900 bg-opacity-60 md:w-[400px]">
-          <TeacherChat />
-        </aside>
+        <TeacherChat />
       </body>
     </html>
   );
