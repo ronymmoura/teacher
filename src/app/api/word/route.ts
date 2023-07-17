@@ -32,3 +32,21 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(e.message, { status: 400 });
   }
 }
+
+export async function PUT(request: NextRequest) {
+  try {
+    const { id, word, translation } = (await request.json()) as any;
+
+    await prisma.word.update({
+      where: { id },
+      data: {
+        word,
+        translation,
+      },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (e: any) {
+    return NextResponse.json(e.message, { status: 400 });
+  }
+}
