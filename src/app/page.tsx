@@ -1,4 +1,5 @@
 import { PastWord } from "@/components/PastWord";
+import { TeacherChat } from "@/components/TeacherChat";
 import { TodayWord } from "@/components/TodayWord";
 import { WordForm } from "@/components/WordForm";
 import { prisma } from "@/lib/db/prisma";
@@ -17,22 +18,28 @@ export default async function Home() {
   );
 
   return (
-    <div className="flex h-screen flex-col px-3">
-      {/* Header */}
-      <WordForm />
+    <>
+      <main className="flex h-screen flex-1 flex-col p-3">
+        {/* Header */}
+        <WordForm />
 
-      {/* Main List */}
-      <div className="flex flex-col space-y-5 overflow-y-auto py-5 pr-5 scrollbar">
-        {todayWords.map((word) => (
-          <TodayWord key={word.id} word={word} />
-        ))}
+        {/* Main List */}
+        <div className="flex flex-col space-y-5 overflow-y-auto py-5 scrollbar">
+          {todayWords.map((word) => (
+            <TodayWord key={word.id} word={word} />
+          ))}
 
-        <hr className="border-slate-700" />
+          <hr className="border-slate-700" />
 
-        {pastWords.map((word) => (
-          <PastWord key={word.id} word={word} />
-        ))}
+          {pastWords.map((word) => (
+            <PastWord key={word.id} word={word} />
+          ))}
+        </div>
+      </main>
+
+      <div className="hidden h-screen flex-col border border-slate-800 bg-zinc-900 bg-opacity-50 shadow-md shadow-black md:flex md:w-[400px]">
+        <TeacherChat />
       </div>
-    </div>
+    </>
   );
 }

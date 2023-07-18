@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 
-import { TeacherChat } from "@/components/TeacherChat";
 import { Navbar } from "@/components/Navbar";
 
 import "./globals.css";
@@ -35,9 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <Navbar />
 
-        <main className="flex-1">{children}</main>
-
-        <TeacherChat />
+        {children}
       </body>
     </html>
   );

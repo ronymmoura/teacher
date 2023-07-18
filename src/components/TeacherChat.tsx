@@ -121,7 +121,7 @@ export function TeacherChat() {
   }
 
   return (
-    <aside className="hidden h-screen flex-col border border-slate-800 bg-zinc-900 bg-opacity-50 shadow-md shadow-black md:flex md:w-[400px]">
+    <aside className="flex h-full flex-col">
       {/* Header */}
       <div className="p-5">
         <div className="font-bol text-3xl">Chat</div>

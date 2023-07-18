@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { FaBookAtlas, FaHouse } from "react-icons/fa6";
+import { FaBookAtlas, FaHouse, FaMessage } from "react-icons/fa6";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { twMerge } from "tailwind-merge";
 
 export function Navbar() {
   return (
-    <nav className="hidden h-screen w-full p-3 md:flex md:w-[350px]">
+    <nav className="hidden h-screen w-full p-3 pr-0 md:flex md:min-w-[350px] md:max-w-[350px]">
       <div className="flex w-full flex-col space-y-5 rounded-xl border border-slate-800 bg-zinc-900 bg-opacity-50 shadow-md shadow-black">
         {/* Logo */}
         <div className="flex items-center space-x-3 p-5">
@@ -18,7 +18,6 @@ export function Navbar() {
         </div>
 
         {/* Menu */}
-
         <div className="flex-1 px-2 py-16">
           <Link
             href="/"
@@ -28,6 +27,16 @@ export function Navbar() {
               <FaHouse size={20} />
             </div>
             <div>Home</div>
+          </Link>
+
+          <Link
+            href="/chat"
+            className="flex items-center space-x-3 rounded-md p-3 shadow-black transition-colors hover:bg-slate-800 hover:shadow-md"
+          >
+            <div className="rounded-full bg-primary p-2">
+              <FaMessage size={20} />
+            </div>
+            <div>Chat</div>
           </Link>
         </div>
 

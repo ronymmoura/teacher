@@ -2,17 +2,25 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaSpinner } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 
 export function WordForm() {
   const router = useRouter();
 
   const [Word, setWord] = useState("");
+  const [Loading, setLoading] = useState(false);
 
   async function addWord() {
-    await axios.post("/api/word", { word: Word });
-    router.refresh();
+    try {
+      setLoading(true);
+      await axios.post("/api/word", { word: Word });
+      router.refresh();
+    } catch (e) {
+      alert(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -27,8 +35,14 @@ export function WordForm() {
         onClick={addWord}
         className="flex items-center space-x-3 rounded-r-lg bg-primary px-4 py-2 text-white transition-opacity hover:opacity-80"
       >
-        <FaPlus className="drop-shadow" />
-        <span className="drop-shadow">Adicionar</span>
+        {!Loading && (
+          <>
+            <FaPlus className="drop-shadow" />
+            <span className="drop-shadow">Adicionar</span>
+          </>
+        )}
+
+        {Loading && <FaSpinner className="animate-spin" />}
       </button>
     </div>
   );
